@@ -15,13 +15,12 @@ public class GroundDetector : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // First, try to get the multiplayer sandbag component
             SandbagMultiPlayer multiPlayerBag = collision.gameObject.GetComponent<SandbagMultiPlayer>();
             if (multiPlayerBag != null && !multiPlayerBag.HasHitGround)
             {
                 multiPlayerBag.HasHitGround = true;
-                //Debug.Log("Flag set on Multiplayer Bag: HasHitGround");
-                return; // Exit once we've found the correct component
+                audioManager.PlayClip(1);
+                return; 
             }
 
             // If it wasn't a multiplayer bag, try to get the single-player component
@@ -29,8 +28,7 @@ public class GroundDetector : MonoBehaviour
             if (singlePlayerBag != null && !singlePlayerBag.HasHitGround)
             {
                 singlePlayerBag.HasHitGround = true;
-                audioManager.PlayClip(1); // Play sound for single-player bag
-                //Debug.Log("Flag set on Single-Player Bag: HasHitGround");
+                audioManager.PlayClip(1); 
             }
         }
     }

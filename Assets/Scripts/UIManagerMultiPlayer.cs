@@ -248,6 +248,8 @@ public class Tutorials
 {
     public CanvasGroup Screen_;
 }
+
+[System.Serializable]
 public class GameSetting
 {
     public CanvasGroup Screen_;
