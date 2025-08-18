@@ -107,6 +107,20 @@ public class UIManagerMultiPlayer : MonoBehaviour
         uiObject.inGame.player2PointsText.text = p2points;
     }
 
+    public void Settings()
+{
+    fadeDuration = 0f;
+    FadeCanvasGroup(uiObject.inGame.Screen_, false);
+    FadeCanvasGroup(uiObject.pausePanel.Screen_, false);
+    FadeCanvasGroup(uiObject.gameOver.Screen_, false);
+    FadeCanvasGroup(uiObject.gameSettings.Screen_, true);
+}
+public void SettingsBack()
+{
+    FadeCanvasGroup(uiObject.gameSettings.Screen_, false);
+    FadeCanvasGroup(uiObject.pausePanel.Screen_, true);
+}
+
     public void SetTurnText(string text)
     {
         uiObject.turnPanel.turnText.text = text;
@@ -197,6 +211,7 @@ public class UIObject
     public GameOver gameOver;
     public TurnPanel turnPanel;
     public Tutorials tutor;
+    public GameSetting gameSettings;
 }
 [System.Serializable]
 
@@ -233,4 +248,7 @@ public class Tutorials
 {
     public CanvasGroup Screen_;
 }
-
+public class GameSetting
+{
+    public CanvasGroup Screen_;
+}

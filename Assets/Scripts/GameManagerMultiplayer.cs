@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManagerMultiplayer : MonoBehaviour
 {
     public static GameManagerMultiplayer Instance { get; private set; }
+    public IAudioManager audioManager;
 
     [SerializeField] private UIManagerMultiPlayer uiManager;
     [SerializeField] private SpawnMangerMultiPlayer spawnManager;
@@ -37,6 +38,7 @@ public class GameManagerMultiplayer : MonoBehaviour
     void Start()
     {
         StartNewRound();
+        audioManager = FindAnyObjectByType<AudioManager>();
     }
     
     /// <summary>
@@ -168,6 +170,7 @@ public class GameManagerMultiplayer : MonoBehaviour
     
     private void EndRound()
     {
+        audioManager.PlayClip(5);
         uiManager.ShowEndOfRoundPanel(_player1Score, _player2Score);
     }
 

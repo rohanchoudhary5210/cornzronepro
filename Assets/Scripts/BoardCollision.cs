@@ -21,6 +21,7 @@ public class BoardCollision : MonoBehaviour
             if (multiPlayerBag != null && !multiPlayerBag.HasLandedOnBoard)
             {
                 multiPlayerBag.HasLandedOnBoard = true;
+                audioManager.PlayClip(2);
                 //Debug.Log("Flag set on Multiplayer Bag: HasLandedOnBoard");
                 return; // Exit once we've found the correct component
             }
