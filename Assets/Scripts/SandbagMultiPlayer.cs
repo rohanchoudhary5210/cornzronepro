@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SandbagMultiPlayer : MonoBehaviour
 {
-
+    
     // --- All your throwing logic variables remain the same ---
     [Header("Throw Controls")]
     [SerializeField] private float throwPower = 2.0f;
@@ -37,7 +37,7 @@ public class SandbagMultiPlayer : MonoBehaviour
         if (_isThrown) return;
         // Using the flick-to-jump logic
 #if UNITY_EDITOR || UNITY_STANDALONE
-        HandleMouseInput();
+            HandleMouseInput();
 #elif UNITY_ANDROID || UNITY_IOS
             HandleTouchInput();
 #endif
@@ -107,7 +107,7 @@ public class SandbagMultiPlayer : MonoBehaviour
         _rb.useGravity = true;
         _isThrown = true;
     }
-    Vector3 CalculateDirection()
+   Vector3 CalculateDirection()
     {
         Vector3 swipeDirectionScreen = (endPos - startPos);
         Quaternion horizontalRotation = Quaternion.AngleAxis(swipeDirectionScreen.x * horizontalSensitivity, Vector3.up);
@@ -119,7 +119,7 @@ public class SandbagMultiPlayer : MonoBehaviour
         return Quaternion.AngleAxis(-upwardAngle, Camera.main.transform.right) * finalDirection;
     }
     public float t = 0;
-    float CalculateSpeed()
+     float CalculateSpeed()
     {
         if (swipeTime > 0)
         {
@@ -136,71 +136,40 @@ public class SandbagMultiPlayer : MonoBehaviour
     /// *** MULTIPLAYER CHANGE ***
     /// This now calculates points and reports them to the MultiplayerGameManager.
     /// </summary>
-    // private IEnumerator CheckIfStable()
-    // {
-    //     yield return new WaitForSeconds(0.5f);
-    //     float timer = 0f;
-    //     Vector3 lastPos = transform.position;
-    //     while (timer < stableDuration)
-    //     {
-    //         yield return new WaitForSeconds(0.1f);
-    //         float distance = Vector3.Distance(transform.position, lastPos);
-    //         if (distance < stabilityThreshold)
-    //         {
-    //             timer += 0.1f;
-    //         }
-    //         else
-    //         {
-    //             timer = 0f;
-    //         }
-    //         lastPos = transform.position;
-    //     }
-
-
-    //     int pointsForThisThrow = 0;
-    //     if (HasScoredInHole)
-    //     {
-    //         pointsForThisThrow = 3;
-
-    //     }
-    //     else if(HasLandedOnBoard && !HasHitGround)
-    //     {
-    //         pointsForThisThrow = 1;
-    //     }
-    //     GameManagerMultiplayer.Instance.RecordThrow(pointsForThisThrow, this.gameObject);
-
-    //     // Disable this script. The manager will handle what happens next.
-    //     this.enabled = false;
-    // }
-    // SandbagMultiPlayer.cs
-
-private IEnumerator CheckIfStable()
-{
-    // --- THIS LOGIC IS REPLACED ---
-    // The sandbag no longer calculates its own points.
-
-    yield return new WaitForSeconds(0.5f);
-    float timer = 0f;
-    Vector3 lastPos = transform.position;
-    while (timer < stableDuration)
+    private IEnumerator CheckIfStable()
     {
-        yield return new WaitForSeconds(0.1f);
-        float distance = Vector3.Distance(transform.position, lastPos);
-        if (distance < stabilityThreshold)
+        yield return new WaitForSeconds(0.5f);
+        float timer = 0f;
+        Vector3 lastPos = transform.position;
+        while (timer < stableDuration)
         {
-            timer += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+            float distance = Vector3.Distance(transform.position, lastPos);
+            if (distance < stabilityThreshold)
+            {
+                timer += 0.1f;
+            }
+            else
+            {
+                timer = 0f;
+            }
+            lastPos = transform.position;
         }
-        else
+
+
+        int pointsForThisThrow = 0;
+        if (HasScoredInHole)
         {
-            timer = 0f;
+            pointsForThisThrow = 3;
+
         }
-        lastPos = transform.position;
+        else if(HasLandedOnBoard && !HasHitGround)
+        {
+            pointsForThisThrow = 1;
+        }
+        GameManagerMultiplayer.Instance.RecordThrow(pointsForThisThrow, this.gameObject);
+
+        // Disable this script. The manager will handle what happens next.
+        this.enabled = false;
     }
-
-    // The bag is stable. Tell the GameManager to evaluate the entire board.
-    GameManagerMultiplayer.Instance.EvaluateBoardState();
-
-    // Disable this script. The manager will handle what happens next.
-    this.enabled = false;
-}
 }

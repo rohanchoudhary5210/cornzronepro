@@ -6,21 +6,17 @@ using UnityEngine;
 /// </summary>
 public class GroundDetector : MonoBehaviour
 {
-    public IAudioManager audioManager;
-     void Start()
-    {
-        audioManager = FindAnyObjectByType<AudioManager>();
-    }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            // First, try to get the multiplayer sandbag component
             SandbagMultiPlayer multiPlayerBag = collision.gameObject.GetComponent<SandbagMultiPlayer>();
             if (multiPlayerBag != null && !multiPlayerBag.HasHitGround)
             {
                 multiPlayerBag.HasHitGround = true;
-                audioManager.PlayClip(1);
-                return; 
+                //Debug.Log("Flag set on Multiplayer Bag: HasHitGround");
+                return; // Exit once we've found the correct component
             }
 
             // If it wasn't a multiplayer bag, try to get the single-player component
@@ -28,7 +24,7 @@ public class GroundDetector : MonoBehaviour
             if (singlePlayerBag != null && !singlePlayerBag.HasHitGround)
             {
                 singlePlayerBag.HasHitGround = true;
-                audioManager.PlayClip(1); 
+                //Debug.Log("Flag set on Single-Player Bag: HasHitGround");
             }
         }
     }

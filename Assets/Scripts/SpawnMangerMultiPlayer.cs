@@ -1,36 +1,56 @@
-// 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnMangerMultiPlayer : MonoBehaviour
 {
-    [Header("Sandbag Prefabs")]
-    [SerializeField] private GameObject player1SandbagPrefab; // Drag the red bag prefab here
-    [SerializeField] private GameObject player2SandbagPrefab; // Drag the blue bag prefab here
+     
+     public static SpawnMangerMultiPlayer Instance { get; private set; }
+    [SerializeField] private GameObject player1BagPrefab;
+    [SerializeField] private GameObject player2BagPrefab;
 
     [Header("Spawn Location")]
-    [SerializeField] private Transform spawnPoint; // Create an empty GameObject for this
+    [SerializeField] private Transform spawnPoint;
 
     /// <summary>
-    /// This function now returns the GameObject it creates.
+    /// Instantiates a new sandbag at the designated spawn point based on the current player.
     /// </summary>
     /// <param name="playerNumber">The current player (1 or 2).</param>
-    /// <returns>The newly spawned sandbag GameObject.</returns>
-    public GameObject SpawnSandbag(int playerNumber)
+    /// 
+   void Awake()
+{
+    if (Instance != null && Instance != this)
     {
-        // 1. Choose which prefab to use based on the current player.
-        GameObject prefabToSpawn = (playerNumber == 1) ? player1SandbagPrefab : player2SandbagPrefab;
+        Destroy(gameObject);
+    }
+    else
+    {
+        Instance = this;
+    }
+}
+    public void SpawnSandbag(int playerNumber)
+    {
+       
+        GameObject prefabToSpawn = null;
 
-        // 2. Check if everything is set up in the Inspector to prevent errors.
-        if (prefabToSpawn == null || spawnPoint == null)
+        // Decide which prefab to use
+        if (playerNumber == 1)
         {
-            Debug.LogError("A Sandbag Prefab or the Spawn Point is not assigned in the Inspector!", this);
-            return null; // Return nothing to prevent a crash.
+            prefabToSpawn = player1BagPrefab;
+        }
+        else
+        {
+            prefabToSpawn = player2BagPrefab;
         }
 
-        // 3. Create an instance of the chosen prefab at the spawn point's position and rotation.
-        GameObject newBagInstance = Instantiate(prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
-
-        // 4. Return the new sandbag so the GameManager can track it.
-        return newBagInstance;
+        if (prefabToSpawn != null && spawnPoint != null)
+        {
+            //Debug.Log($"Spawning bag for Player {playerNumber} at {spawnPoint.position}");
+            Instantiate(prefabToSpawn, spawnPoint.position, spawnPoint.rotation);
+        }
+        else
+        {
+            //Debug.LogError("SpawnManager is missing a bag prefab or spawn point reference!");
+        }
     }
 }

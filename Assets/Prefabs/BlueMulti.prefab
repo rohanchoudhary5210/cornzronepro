@@ -963,7 +963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPower: 100
   verticalSensitivity: 0.03
-  horizontalSensitivity: 0.03
+  horizontalSensitivity: 0.08
   MinSwipeDist: 30
   MaxBallSpeed: 50
   stabilityThreshold: 0.001

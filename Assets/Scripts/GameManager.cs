@@ -1,37 +1,48 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
+/// <summary>
+/// Manages the core game state, including score, coins, and the game timer.
+/// It acts as the central hub for game logic.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField] private UIManager uiManager;
-    [SerializeField] private SpawnManager spawnManager;
-    
+    // --- Game State ---
     public int Score { get; private set; }
     public int Coins { get; private set; }
     [SerializeField] private float _timeRemaining = 30f;
-    private bool _isTimerRunning = false;
-    public bool IsTimerRunning => _isTimerRunning;
-    public IAudioManager audioManager;
-    private List<SandbagController> _bagsInPlay = new List<SandbagController>();
-    private Dictionary<SandbagController, int> _boardStateBeforeThrow = new Dictionary<SandbagController, int>();
+    public bool _isTimerRunning = false;
+
+    // --- Dependencies ---
+    // Assign these in the Unity Inspector
+    [SerializeField] private UIManager uiManager;
+    [SerializeField] private SpawnManager spawnManager;
 
     void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); }
-        else { Instance = this; }
+        // Singleton pattern to ensure only one instance exists
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
     void Start()
     {
-        audioManager = FindAnyObjectByType<AudioManager>();
-        Time.timeScale = 1f;
-        _isTimerRunning = true;
+        spawnManager.SpawnSandbag();
+        // Initialize UI and start the game timer
         uiManager.UpdateScoreText(Score);
         uiManager.UpdateCoinsText(Coins);
-        PrepareForNewThrow();
+        _isTimerRunning = true;
+
+        // Spawn the first sandbag
 
     }
 
@@ -40,78 +51,9 @@ public class GameManager : MonoBehaviour
         HandleTimer();
     }
 
-    public void RegisterNewBag(SandbagController newBag)
-    {
-        if (newBag != null)
-        {
-            _bagsInPlay.Add(newBag);
-        }
-    }
-
-    public void EvaluateBoardState()
-    {
-        Score = 0;
-        Coins = 0;
-
-        foreach (SandbagController bag in _bagsInPlay)
-        {
-            bool wasOnBoard = _boardStateBeforeThrow.ContainsKey(bag) && _boardStateBeforeThrow[bag] == 1;
-            bool wasInHole = _boardStateBeforeThrow.ContainsKey(bag) && _boardStateBeforeThrow[bag] == 3;
-
-            if (bag.HasScoredInHole)
-            {
-                Score += 3;
-
-                // *** YOUR NEW TIME RULE IS IMPLEMENTED HERE ***
-                // Only add time if the bag was NOT already in the hole before this throw.
-                if (!wasInHole)
-                {
-                    AddTime(10f);
-                    Debug.Log("New cornhole! +10 seconds.");
-                }
-                
-                if (wasOnBoard)
-                {
-                    Coins += 20;
-                }
-                else
-                {
-                    Coins += 30;
-                }
-            }
-            else if (bag.HasLandedOnBoard && !bag.HasHitGround)
-            {
-                Score += 1;
-                //Coins += 10;
-            }
-        }
-
-        uiManager.UpdateScoreText(Score);
-        uiManager.UpdateCoinsText(Coins);
-        
-        RequestNewSandbag();
-    }
-    
-    private void PrepareForNewThrow()
-    {
-        _boardStateBeforeThrow.Clear();
-        foreach (SandbagController bag in _bagsInPlay)
-        {
-            int currentBagValue = 0;
-            if (bag.HasScoredInHole) { currentBagValue = 3; }
-            else if (bag.HasLandedOnBoard && !bag.HasHitGround) { currentBagValue = 1; }
-            _boardStateBeforeThrow[bag] = currentBagValue;
-        }
-        
-        spawnManager.SpawnSandbag();
-    }
-
-    public void RequestNewSandbag()
-    {
-        PrepareForNewThrow();
-    }
-    
-    #region Other Methods
+    /// <summary>
+    /// Manages the countdown timer and ends the game when time runs out.
+    /// </summary>
     public void HandleTimer()
     {
         if (_isTimerRunning)
@@ -126,17 +68,53 @@ public class GameManager : MonoBehaviour
                 _timeRemaining = 0;
                 _isTimerRunning = false;
                 uiManager.UpdateTimerText(_timeRemaining);
-                audioManager.PlayClip(5); 
                 uiManager.GameOver();
+                //Debug.Log("Time's up!");
             }
         }
     }
 
+    /// <summary>
+    /// Adds a specified value to the player's score.
+    /// </summary>
+    /// <param name="amount">The number of points to add.</param>
+    public void AddScore(int amount)
+    {
+        Score += amount;
+        uiManager.UpdateScoreText(Score);
+    }
+
+    /// <summary>
+    /// Adds a specified value to the player's coins.
+    /// </summary>
+    /// <param name="amount">The number of coins to add.</param>
+    public void AddCoins(int amount)
+    {
+        Coins += amount;
+        uiManager.UpdateCoinsText(Coins);
+    }
+
+    /// <summary>
+    /// Adds time to the game timer.
+    /// </summary>
+    /// <param name="amount">The amount of time in seconds to add.</param>
     public void AddTime(float amount)
     {
         _timeRemaining += amount;
     }
-    
+
+    /// <summary>
+    /// Called when a sandbag throw is complete and a new one is needed.
+    /// </summary>
+    public void RequestNewSandbag()
+    {
+        // You could add a delay here if you want
+        spawnManager.SpawnSandbag();
+    }
+
+    /// <summary>
+    /// Reloads the current scene to restart the game.
+    /// </summary>
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -145,5 +123,5 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    #endregion
+
 }

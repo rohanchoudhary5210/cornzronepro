@@ -7,29 +7,25 @@ using UnityEngine;
 /// </summary>
 public class BoardCollision : MonoBehaviour
 {
-    public IAudioManager audioManager;
-    void Start()
-    {
-        audioManager = FindAnyObjectByType<AudioManager>();
-    }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            // First, try to get the multiplayer sandbag component
             SandbagMultiPlayer multiPlayerBag = collision.gameObject.GetComponent<SandbagMultiPlayer>();
             if (multiPlayerBag != null && !multiPlayerBag.HasLandedOnBoard)
             {
                 multiPlayerBag.HasLandedOnBoard = true;
-                audioManager.PlayClip(2);
-                return; 
+                //Debug.Log("Flag set on Multiplayer Bag: HasLandedOnBoard");
+                return; // Exit once we've found the correct component
             }
 
-            
+            // If it wasn't a multiplayer bag, try to get the single-player component
             SandbagController singlePlayerBag = collision.gameObject.GetComponent<SandbagController>();
             if (singlePlayerBag != null && !singlePlayerBag.HasLandedOnBoard)
             {
                 singlePlayerBag.HasLandedOnBoard = true;
-                audioManager.PlayClip(2); 
+                //Debug.Log("Flag set on Single-Player Bag: HasLandedOnBoard");
             }
         }
     }
