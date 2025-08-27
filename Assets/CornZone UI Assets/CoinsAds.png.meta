@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 387d517b592050d489d65de2fabfb50d
+guid: 0fe880e845bb1dd4eb5f03156c1c8d71
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: about bg_0
+      name: CoinsAds_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 899
-        height: 1132
+        width: 3057
+        height: 1697
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7390b69ebb602a42844aa77abc894ae
-      internalID: -1715917688
+      spriteID: 11bc562ddfe2d4a46a3380d7c716eec2
+      internalID: 1534693042
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b53af0b837f194a4a9c8222566e61624
+    spriteID: 6a3880c7cfb3b3f4c94d8327beab64c8
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      about bg_0: -1715917688
+      CoinsAds_0: 1534693042
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

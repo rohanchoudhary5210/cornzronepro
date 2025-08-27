@@ -12,13 +12,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Street.unity
     guid: 554cd270dc6ee054191ec9a6477a8718
   - enabled: 1
-    path: Assets/Scenes/Rooftop.unity
+    path: Assets/Scenes/Rooftop Single.unity
     guid: 586ab124eb6fad9418003fa04563ead2
   - enabled: 1
     path: Assets/Scenes/Stadium PVP.unity
     guid: bc4d7cf3122c84c4c9be5d1112acfd5d
   - enabled: 1
-    path: Assets/Scenes/Lawn.unity
+    path: Assets/Scenes/Lawn PVP.unity
     guid: 0686a368fdfb44b49901bc7d1d5aab8b
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 29316524563260848ab936ea8beb276d, type: 2}
