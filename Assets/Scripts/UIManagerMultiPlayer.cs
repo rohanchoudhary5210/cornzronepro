@@ -156,6 +156,11 @@ public class UIManagerMultiPlayer : MonoBehaviour
         FadeCanvasGroup(uiObject.gameOver.Screen_, true);
         FadeCanvasGroup(uiObject.inGame.Screen_, false);
     }
+     public void setting(bool isActive)
+    {
+        FadeCanvasGroup(uiObject.setting.Screen, isActive);
+    }
+
 
 
     public void RetryGame()
@@ -197,6 +202,7 @@ public class UIObject
     public GameOver gameOver;
     public TurnPanel turnPanel;
     public Tutorials tutor;
+    public SettingsMultiPlayer setting;
 }
 [System.Serializable]
 
@@ -233,4 +239,8 @@ public class Tutorials
 {
     public CanvasGroup Screen_;
 }
-
+[System.Serializable]
+public class SettingsMultiPlayer
+{
+    public CanvasGroup Screen;
+}
