@@ -186,6 +186,11 @@ public class UIManager : MonoBehaviour
         FadeCanvasGroup(uiItems.inGame.Screen_, false);
         SceneManager.LoadScene(0);
     }
+     public void setting(bool isActive)
+    {
+        FadeCanvasGroup(uiItems.singleSettings.Screen_, isActive);
+    }
+
     public void clearbags()
     {
         SpawnManager.Instance.ClearSandbags();
@@ -200,6 +205,7 @@ public class uiItems
     public gameOverScreen gameOverScreen;
     public Warning warning;
     public Tutorial tutor;
+    public SingleSettings singleSettings;
 }
 
 
@@ -218,6 +224,12 @@ public class inGame
     public TextMeshProUGUI CoinsText;
     public TextMeshProUGUI TimerText;
 }
+[System.Serializable]
+public class SingleSettings
+{
+    public CanvasGroup Screen_;
+}
+
 
 [System.Serializable]
 public class gameOverScreen

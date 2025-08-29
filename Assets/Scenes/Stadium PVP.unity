@@ -316,13 +316,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96985286}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08545173, y: -0, z: -4.6566123e-10, w: 0.9963423}
-  m_LocalPosition: {x: -2.824, y: 0.934, z: -1.519}
+  m_LocalRotation: {x: 0.074630655, y: 0, z: 0, w: 0.9972113}
+  m_LocalPosition: {x: -2.824, y: 0.934, z: -1.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 9.804, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 8.56, y: 0, z: 0}
 --- !u!114 &96985290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,7 +496,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 0
   m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &142278071
 GameObject:
@@ -794,7 +794,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 251816918}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 518050959}
+        m_TargetAssemblyTypeName: UIManagerMultiPlayer, Assembly-CSharp
+        m_MethodName: resumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &251816918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1207,7 +1219,7 @@ Transform:
   m_GameObject: {fileID: 440017975}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -2.8166919, y: 0.357, z: 3.4905138}
+  m_LocalPosition: {x: -2.8166919, y: 0.357, z: 3.248}
   m_LocalScale: {x: 6.9530745, y: 6.953069, z: 6.9530745}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1631,6 +1643,8 @@ MonoBehaviour:
       turnText: {fileID: 491669966}
     tutor:
       Screen_: {fileID: 1030452792}
+    setting:
+      Screen: {fileID: 1497097324}
   bagsRemainingText: {fileID: 169563841}
   fadeDuration: 0.2
   endOfRoundPanel: {fileID: 0}
@@ -2255,7 +2269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0.007, y: -0.189, z: -0.063}
   m_AnchorMin: {x: 0.48579636, y: 0.36}
   m_AnchorMax: {x: 0.48579636, y: 0.36}
-  m_AnchoredPosition: {x: 0.0002002716, y: -0.000061035156}
+  m_AnchoredPosition: {x: 0.00019836426, y: -0.000061035156}
   m_SizeDelta: {x: 384.8, y: 497.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &789128194
@@ -2758,8 +2772,8 @@ CanvasGroup:
   m_GameObject: {fileID: 937048228}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &1002737645
 GameObject:
@@ -2854,7 +2868,7 @@ GameObject:
   - component: {fileID: 1014301998}
   - component: {fileID: 1014301997}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: Home
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4543,7 +4557,7 @@ GameObject:
   - component: {fileID: 1367496841}
   - component: {fileID: 1367496840}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4615,15 +4629,15 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 518050959}
         m_TargetAssemblyTypeName: UIManagerMultiPlayer, Assembly-CSharp
-        m_MethodName: backToHome
-        m_Mode: 1
+        m_MethodName: setting
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1367496841
 MonoBehaviour:
@@ -4801,7 +4815,7 @@ GameObject:
   - component: {fileID: 1378264102}
   - component: {fileID: 1378264101}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4872,7 +4886,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 518050959}
         m_TargetAssemblyTypeName: UIManagerMultiPlayer, Assembly-CSharp
-        m_MethodName: backToHome
+        m_MethodName: RetryGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5380,6 +5394,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1497097323}
   - component: {fileID: 1497097324}
+  - component: {fileID: 1497097326}
+  - component: {fileID: 1497097325}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -5419,6 +5435,44 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1497097325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497097322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7eab3c69e523c484e8d520e6922a3042, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1497097326
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497097322}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1498940163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5521,8 +5575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689e97669feb7a340a30c732ba904e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1BagPrefab: {fileID: 5041487757232748848, guid: fa84c7eea9971c947b3c51957e66e27d, type: 3}
-  player2BagPrefab: {fileID: 5041487757232748848, guid: 785ba84bfdac57a42aba9d4e9efd83cf, type: 3}
+  player1BagPrefab: {fileID: 5041487757232748848, guid: 785ba84bfdac57a42aba9d4e9efd83cf, type: 3}
+  player2BagPrefab: {fileID: 5041487757232748848, guid: fa84c7eea9971c947b3c51957e66e27d, type: 3}
   spawnPoint: {fileID: 1552522434}
 --- !u!4 &1552522434
 Transform:
@@ -5533,7 +5587,7 @@ Transform:
   m_GameObject: {fileID: 1552522432}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.83, y: 0.353, z: -0.035}
+  m_LocalPosition: {x: -2.83, y: 0.353, z: 0.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6806,7 +6860,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1850752014}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 518050959}
+        m_TargetAssemblyTypeName: UIManagerMultiPlayer, Assembly-CSharp
+        m_MethodName: setting
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1850752014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7316,7 +7382,7 @@ GameObject:
   - component: {fileID: 1959057184}
   - component: {fileID: 1959057183}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Resume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7387,7 +7453,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 518050959}
         m_TargetAssemblyTypeName: UIManagerMultiPlayer, Assembly-CSharp
-        m_MethodName: RetryGame
+        m_MethodName: resumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7542,7 +7608,7 @@ Transform:
   m_GameObject: {fileID: 2073370768}
   serializedVersion: 2
   m_LocalRotation: {x: -0.20703791, y: -0, z: -0, w: 0.978333}
-  m_LocalPosition: {x: -2.797, y: 0.279, z: 3.762}
+  m_LocalPosition: {x: -2.797, y: 0.279, z: 3.5194862}
   m_LocalScale: {x: 0.45168, y: 0.02, z: 0.4615106}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8318,7 +8384,7 @@ Transform:
   m_GameObject: {fileID: 7071193991529696394}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -2.9835658, y: 0.3149972, z: 3.9904184}
+  m_LocalPosition: {x: -2.9835658, y: 0.3149972, z: 3.7479045}
   m_LocalScale: {x: 6.9530745, y: 6.953069, z: 6.9530745}
   m_ConstrainProportionsScale: 0
   m_Children:
