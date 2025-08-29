@@ -7,6 +7,7 @@ using TMPro;
 
 public class Menu : MonoBehaviour
 {
+
     public Sprite[] sprites;
     private Coroutine aboutAnimationCoroutine;
     public Image musicButtonImage;
@@ -199,7 +200,6 @@ public class Menu : MonoBehaviour
     }
 }
 
-
     [System.Serializable]
     public class UIObjects
     {
@@ -226,48 +226,53 @@ public class Menu : MonoBehaviour
 
 
 
-    //Play-Sub
-    [System.Serializable]
-    public class PlayPart
-    {
-        public CanvasGroup Screen_;
+//Play-Sub
+[System.Serializable]
+public class PlayPart
+{
+    public CanvasGroup Screen_;
+    public TextMeshProUGUI coins_text;
 
     }
 
 
 
-    //Maps- Timer
-    [System.Serializable]
-    public class TimerSubmenu
-    {
-        public CanvasGroup Screen_;
+//Maps- Timer
+[System.Serializable]
+public class TimerSubmenu
+{
+    public CanvasGroup Screen_;
+    public TextMeshProUGUI coins_text;
     }
 
 
 
-    //Maps - PassPlay
-    [System.Serializable]
-    public class PassPlaySubmenu
-    {
-        public CanvasGroup Screen_;
+//Maps - PassPlay
+[System.Serializable]
+public class PassPlaySubmenu
+{
+    public CanvasGroup Screen_;
+    public TextMeshProUGUI coins_text;
     }
 
 
-    //Settings
-    [System.Serializable]
-    public class Settings
-    {
-        public CanvasGroup Screen_;
-        public GameObject Sound, Music;
+//Settings
+[System.Serializable]
+public class Settings
+{
+    public CanvasGroup Screen_;
+    public GameObject Sound, Music;
+     public TextMeshProUGUI coins_text; 
 
     }
 
 
-    //Info
-    [System.Serializable]
-    public class About
-    {
-        public CanvasGroup Screen_;
+//Info
+[System.Serializable]
+public class About
+{
+    public CanvasGroup Screen_;
+        public TextMeshProUGUI coins_text;
     }
 
 

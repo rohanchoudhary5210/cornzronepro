@@ -12,11 +12,13 @@ using Unity.VisualScripting;
 
 public class date_time : MonoBehaviour
 {
-   // string filepath = Application.persistentDataPath + "/playerData.json";
+    // string filepath = Application.persistentDataPath + "/playerData.json";
     // Start is called before the first frame update
     public Button[] buttons;
+    public static date_time Instance { get; private set; }
     void Awake()
     {
+        Instance = this;
         string filepath = Application.persistentDataPath + "/playerData.json";
         Debug.Log(filepath);
         if (!File.Exists(filepath))
@@ -35,27 +37,30 @@ public class date_time : MonoBehaviour
             };
             File.WriteAllText(filepath, JsonConvert.SerializeObject(data));
         }
-        loadData(JsonConvert.DeserializeObject<playerData>(File.ReadAllText(filepath)),filepath);
+        currentPlayerData = JsonConvert.DeserializeObject<playerData>(File.ReadAllText(filepath));
+        loadData(currentPlayerData, filepath);
+        CalculateRewards(currentPlayerData, filepath);
     }
 
-    void Start()
-    {
-
-        // loaddata(filepath);
-    }
+  
     public void loadData(playerData data, string filepath)
     {
 
-        Debug.Log(data.coins);
-        Debug.Log(data.daysCount);
-        Debug.Log(data.lastDate);
-        Debug.Log(data.p1);
-        Debug.Log(data.p2);
-        Debug.Log(data.p3);
-        Debug.Log(data.count);
-        Debug.Log(data.alreadycounted);
-        Debug.Log(string.Join(", ", data.days));
-        CalculateRewards(data, filepath);
+        // Debug.Log(data.coins);
+        // Debug.Log(data.daysCount);
+        // Debug.Log(data.lastDate);
+        // Debug.Log(data.p1);
+        // Debug.Log(data.p2);
+        // Debug.Log(data.p3);
+        // Debug.Log(data.count);
+        // Debug.Log(data.alreadycounted);
+        // Debug.Log(string.Join(", ", data.days));
+        //CalculateRewards(data, filepath);
+        Menu.Instance.uiObjects.playPart.coins_text.text = data.coins.ToString();
+        Menu.Instance.uiObjects.timerSubmenu.coins_text.text = data.coins.ToString();
+        Menu.Instance.uiObjects.passPlaySubmenu.coins_text.text = data.coins.ToString();
+        Menu.Instance.uiObjects.settings.coins_text.text = data.coins.ToString();
+        Menu.Instance.uiObjects.about.coins_text.text = data.coins.ToString();
 
     }
 
@@ -105,17 +110,28 @@ public class date_time : MonoBehaviour
                 buttons[updatedData.daysCount % 7].interactable = false;
                 File.WriteAllText(filepath, JsonConvert.SerializeObject(updatedData));
                 data = updatedData;
+                loadData(data, filepath);
             });
         }
         // else if (data.alreadycounted)
         else
         {
             buttons[data.daysCount % 7].interactable = false;
+            loadData(data, filepath);
         }
         File.WriteAllText(filepath, JsonConvert.SerializeObject(data, Formatting.Indented));
-        }
+        
     }
+    private playerData currentPlayerData;
 
+    public void AddCoins(int amount)
+    {
+        currentPlayerData.coins += amount;
+        string filepath = Application.persistentDataPath + "/playerData.json";
+        File.WriteAllText(filepath, JsonConvert.SerializeObject(currentPlayerData, Formatting.Indented));
+        loadData(currentPlayerData, filepath);
+    }
+    }
 [System.Serializable]
 public class playerData
 {
