@@ -9,16 +9,28 @@ EditorBuildSettings:
     path: Assets/Scenes/Home.unity
     guid: 8d613bc6ba8c0294dbf9f5c105177137
   - enabled: 1
-    path: Assets/Scenes/Street.unity
-    guid: 554cd270dc6ee054191ec9a6477a8718
+    path: Assets/Scenes/Street Single.unity
+    guid: 4de467aed56fbe747baf72f8bbc2bd23
   - enabled: 1
-    path: Assets/Scenes/Rooftop.unity
+    path: Assets/Scenes/Rooftop Single.unity
     guid: 586ab124eb6fad9418003fa04563ead2
+  - enabled: 1
+    path: Assets/Scenes/Stadium Single.unity
+    guid: 37fd95d242dcf8044b0052051402a64b
+  - enabled: 1
+    path: Assets/Scenes/Lawn Single.unity
+    guid: 4888116ba25775d4ca1ebebe3b402070
+  - enabled: 1
+    path: Assets/Scenes/Street PVP.unity
+    guid: c3238a58abaf58b47aa1272959706b30
+  - enabled: 1
+    path: Assets/Scenes/Rooftop  PVP.unity
+    guid: dbf9bc1971a339741b06ccfb42d6f992
   - enabled: 1
     path: Assets/Scenes/Stadium PVP.unity
     guid: bc4d7cf3122c84c4c9be5d1112acfd5d
   - enabled: 1
-    path: Assets/Scenes/Lawn.unity
+    path: Assets/Scenes/Lawn PVP.unity
     guid: 0686a368fdfb44b49901bc7d1d5aab8b
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 29316524563260848ab936ea8beb276d, type: 2}
