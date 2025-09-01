@@ -1,11 +1,8 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-/// <summary>
-/// Manages the core game state, including score, coins, and the game timer.
-/// It acts as the central hub for game logic.
-/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -13,8 +10,10 @@ public class GameManager : MonoBehaviour
     // --- Game State ---
     public int Score { get; private set; }
     public int Coins { get; private set; }
-    [SerializeField] private float _timeRemaining = 30f;
     public bool _isTimerRunning = false;
+     public float _timeRemaining = 20f;
+     public Slider timerSlider;
+
 
     // --- Dependencies ---
     // Assign these in the Unity Inspector
@@ -48,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        HandleTimer();
+         HandleTimer();
     }
 
     /// <summary>
@@ -71,6 +70,7 @@ public class GameManager : MonoBehaviour
                 uiManager.GameOver();
                 //Debug.Log("Time's up!");
             }
+            timerSlider.value = _timeRemaining / 20f;
         }
     }
 
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
     /// <param name="amount">The amount of time in seconds to add.</param>
     public void AddTime(float amount)
     {
-        _timeRemaining += amount;
+         _timeRemaining += amount;
     }
 
     /// <summary>
