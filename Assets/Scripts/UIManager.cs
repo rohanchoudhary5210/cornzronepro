@@ -148,7 +148,8 @@ public class UIManager : MonoBehaviour
         FadeCanvasGroup(uiItems.inGame.Screen_, false);
         FadeCanvasGroup(uiItems.pauseScreen.Screen_, false);
         FadeCanvasGroup(uiItems.gameOverScreen.Screen_, true);
-        CoinManager.Instance.AddCoins(int.Parse(uiItems.gameOverScreen.CoinsText.text));
+        date_time.Instance.AddCoins(int.Parse(uiItems.inGame.CoinsText.text));
+        
     }
     public void RestartGame()
     {
