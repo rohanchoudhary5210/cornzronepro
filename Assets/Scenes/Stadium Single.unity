@@ -5614,9 +5614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isTimerRunning: 0
-  _timeRemaining: 30
-  timerSlider: {fileID: 0}
-  uiManager: {fileID: 0}
+  uiManager: {fileID: 1121111322}
   spawnManager: {fileID: 1552522435}
 --- !u!1 &1616150125
 GameObject:
@@ -9491,12 +9489,11 @@ SceneRoots:
   - {fileID: 627721502}
   - {fileID: 1415211228}
   - {fileID: 1638910582}
+  - {fileID: 1121111321}
   - {fileID: 660735154}
   - {fileID: 1405362033}
   - {fileID: 1095768905}
   - {fileID: 1498940163}
   - {fileID: 503291972}
   - {fileID: 407733240}
-  - {fileID: 1121111321}
-  - {fileID: 264892369}
   - {fileID: 712797254}
