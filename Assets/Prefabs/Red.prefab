@@ -922,7 +922,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -966,8 +966,11 @@ MonoBehaviour:
   horizontalSensitivity: 0.06
   MinSwipeDist: 30
   MaxBallSpeed: 50
+  angle: 0
   stabilityThreshold: 0.001
   stableDuration: 0.5
+  launchSpeed: 0
+  direction: {x: 0, y: 0, z: 0}
 --- !u!1 &5243391054214837518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,6 +1402,8 @@ SkinnedMeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1420,6 +1425,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
