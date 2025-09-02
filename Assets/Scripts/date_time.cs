@@ -12,7 +12,7 @@ using Unity.VisualScripting;
 
 public class date_time : MonoBehaviour
 {
-   // string filepath = Application.persistentDataPath + "/playerData.json";
+    // string filepath = Application.persistentDataPath + "/playerData.json";
     // Start is called before the first frame update
     public Button[] buttons;
     void Awake()
@@ -35,7 +35,7 @@ public class date_time : MonoBehaviour
             };
             File.WriteAllText(filepath, JsonConvert.SerializeObject(data));
         }
-        loadData(JsonConvert.DeserializeObject<playerData>(File.ReadAllText(filepath)),filepath);
+        loadData(JsonConvert.DeserializeObject<playerData>(File.ReadAllText(filepath)), filepath);
     }
 
     void Start()
@@ -113,8 +113,21 @@ public class date_time : MonoBehaviour
             buttons[data.daysCount % 7].interactable = false;
         }
         File.WriteAllText(filepath, JsonConvert.SerializeObject(data, Formatting.Indented));
-        }
     }
+    public int loadPlayerCoins(string filepath)
+    {
+        playerData data = JsonConvert.DeserializeObject<playerData>(File.ReadAllText(filepath));
+        loadData(data, filepath);
+        return data.coins;
+    }
+    public void allotCoinRewards(int reward)
+    {
+        string filepath = Application.persistentDataPath + "/playerData.json";
+        playerData data = JsonConvert.DeserializeObject<playerData>(File.ReadAllText(filepath));
+        data.coins += reward;
+        File.WriteAllText(filepath, JsonConvert.SerializeObject(data, Formatting.Indented));
+    }
+}
 
 [System.Serializable]
 public class playerData

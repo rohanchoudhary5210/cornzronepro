@@ -60,13 +60,7 @@ public class UIManagerMultiPlayer : MonoBehaviour
             Instance = this;
         }
     }
-    [Header("In-Game UI")]
-
-    [Header("Panels")]
-
-    // [SerializeField] private TextMeshProUGUI turnPanelText;
-    [SerializeField] private GameObject endOfRoundPanel;
-    [SerializeField] private TextMeshProUGUI endOfRoundSummaryText;
+    
 
 
 
@@ -92,7 +86,6 @@ public class UIManagerMultiPlayer : MonoBehaviour
         FadeCanvasGroup(uiObject.tutor.Screen_, false);
         Debug.Log("Tutorial hidden");
 
-    // --- ADD THIS LINE ---
     // NOW that the tutorial is finished, we mark it as complete.
     CoinManager.Instance.TutorialCompleted();
     }
@@ -117,10 +110,8 @@ public class UIManagerMultiPlayer : MonoBehaviour
         bagsRemainingText.text = $"Bags Left: {count}";
     }
 
-    /// <summary>
     /// Shows the panel with a message (e.g., "Player 2's Turn").
-    /// </summary>
-    /// 
+    
     public void ShowTurnPanel(string message)
     {
         uiObject.turnPanel.turnText.text = message;
@@ -129,8 +120,7 @@ public class UIManagerMultiPlayer : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Hides the turn panel. Called by the GameManager.
+    
     /// </summary>
     public void HideTurnPanel()
     {
@@ -142,11 +132,11 @@ public class UIManagerMultiPlayer : MonoBehaviour
     {
         if (p1Score > p2Score)
         {
-            uiObject.gameOver.gameOverText.text = "Red Wins";
+            uiObject.gameOver.gameOverText.text = "Blue Wins";
         }
         else if (p2Score > p1Score)
         {
-            uiObject.gameOver.gameOverText.text = "Blue Wins";
+            uiObject.gameOver.gameOverText.text = "Red Wins";
         }
         else
         {

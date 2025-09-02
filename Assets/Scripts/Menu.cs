@@ -3,19 +3,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
+using Newtonsoft.Json;
 
 
 public class Menu : MonoBehaviour
 {
+    public date_time dataLoader;
     public Sprite[] sprites;
     private Coroutine aboutAnimationCoroutine;
     public Image musicButtonImage;
     public Image soundButtonImage;
     public static Menu Instance { get; private set; }
     public int index = 1;
-
+    string filepath = Application.persistentDataPath + "/playerData.json";
     void Awake()
     {
+
         Instance = this;
         GameOn();
     }
@@ -75,6 +79,7 @@ public class Menu : MonoBehaviour
 
     public void GameOn()
     {
+        
         FadeCanvasGroup(uiObjects.HomeScreen.Screen_, true);
         FadeCanvasGroup(uiObjects.playPart.Screen_, false);
         FadeCanvasGroup(uiObjects.passPlaySubmenu.Screen_, false);
@@ -86,6 +91,7 @@ public class Menu : MonoBehaviour
     }
     public void play()
     {
+        uiObjects.playPart.COINS.text = dataLoader.loadPlayerCoins(filepath).ToString();
         FadeCanvasGroup(uiObjects.HomeScreen.Screen_, false);
         FadeCanvasGroup(uiObjects.playPart.Screen_, true);
         FadeCanvasGroup(uiObjects.passPlaySubmenu.Screen_, false);
@@ -200,92 +206,94 @@ public class Menu : MonoBehaviour
 }
 
 
-    [System.Serializable]
-    public class UIObjects
-    {
-        public HomeScreen HomeScreen;
-        public PlayPart playPart;
-        public TimerSubmenu timerSubmenu;
-        public PassPlaySubmenu passPlaySubmenu;
-        public Settings settings;
-        public About about;
-        public DailyRewards dailyRewards;
-        public DailyRewardsMenu dailyRewardsMenu;
+[System.Serializable]
+public class UIObjects
+{
+    public HomeScreen HomeScreen;
+    public PlayPart playPart;
+    public TimerSubmenu timerSubmenu;
+    public PassPlaySubmenu passPlaySubmenu;
+    public Settings settings;
+    public About about;
+    public DailyRewards dailyRewards;
+    public DailyRewardsMenu dailyRewardsMenu;
 
-    }
-
-
-
-
-    //Menu
-    [System.Serializable]
-    public class HomeScreen
-    {
-        public CanvasGroup Screen_;
-    }
+}
 
 
 
-    //Play-Sub
-    [System.Serializable]
-    public class PlayPart
-    {
-        public CanvasGroup Screen_;
 
-    }
-
-
-
-    //Maps- Timer
-    [System.Serializable]
-    public class TimerSubmenu
-    {
-        public CanvasGroup Screen_;
-    }
+//Menu
+[System.Serializable]
+public class HomeScreen
+{
+    public CanvasGroup Screen_;
+    
+}
 
 
 
-    //Maps - PassPlay
-    [System.Serializable]
-    public class PassPlaySubmenu
-    {
-        public CanvasGroup Screen_;
-    }
+//Play-Sub
+[System.Serializable]
+public class PlayPart
+{
+    public CanvasGroup Screen_;
+    public TextMeshProUGUI COINS;
+
+}
 
 
-    //Settings
-    [System.Serializable]
-    public class Settings
-    {
-        public CanvasGroup Screen_;
-        public GameObject Sound, Music;
 
-    }
-
-
-    //Info
-    [System.Serializable]
-    public class About
-    {
-        public CanvasGroup Screen_;
-    }
+//Maps- Timer
+[System.Serializable]
+public class TimerSubmenu
+{
+    public CanvasGroup Screen_;
+}
 
 
-    //DailyRewards
-    [System.Serializable]
-    public class DailyRewards
-    {
-        public CanvasGroup Screen_;
-    }
+
+//Maps - PassPlay
+[System.Serializable]
+public class PassPlaySubmenu
+{
+    public CanvasGroup Screen_;
+}
 
 
-    //DailyRewardsMenu
-    [System.Serializable]
-    public class DailyRewardsMenu
-    {
-        public CanvasGroup Screen_;
-        public TextMeshProUGUI day_text;
-        public TextMeshProUGUI coins_text;
-    }
+//Settings
+[System.Serializable]
+public class Settings
+{
+    public CanvasGroup Screen_;
+    public GameObject Sound, Music;
+
+}
+
+
+//Info
+[System.Serializable]
+public class About
+{
+    public CanvasGroup Screen_;
+}
+
+
+//DailyRewards
+[System.Serializable]
+public class DailyRewards
+{
+    public CanvasGroup Screen_;
+}
+
+
+//DailyRewardsMenu
+[System.Serializable]
+public class DailyRewardsMenu
+{
+    public CanvasGroup Screen_;
+    public TextMeshProUGUI day_text;
+    public TextMeshProUGUI coins_text;
+}
 
 
