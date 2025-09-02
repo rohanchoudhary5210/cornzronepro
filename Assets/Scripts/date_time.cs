@@ -143,4 +143,5 @@ public class playerData
     public int count;
     public bool alreadycounted;
     public int[] days;
+    
 }
