@@ -6,7 +6,7 @@ public class ProjectileSimulator : MonoBehaviour
 
     [Header("Trajectory Prediction Visuals")]
     public LineRenderer lineRenderer;
-    public int resolution = 30;
+    public int resolution = 50;
 
     void Awake()
     {
@@ -31,7 +31,7 @@ public class ProjectileSimulator : MonoBehaviour
         for (int i = 0; i <= resolution; i++)
         {
             float t = i * dt;
-            Vector3 pos = (startPos + velocity/7 * t + 0.5f * Physics.gravity * t * t);
+            Vector3 pos = startPos + velocity/7 * t + 0.5f * Physics.gravity * t * t;
             lineRenderer.SetPosition(i, pos);
         }
 
