@@ -1,8 +1,10 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEditor;
+
+
 using UnityEngine.SceneManagement;
+
 
 /// <summary>
 /// Handles all UI updates. It gets data from other scripts but doesn't manage game state itself.
@@ -10,6 +12,16 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    void Start()
+    {
+
+
+    }
+    void Update()
+    {
+        CoinManager.Instance.LoadCoins();
+        UpdateCoinsText(CoinManager.Instance.Coins);
+    }
     public static UIManager Instance { get; private set; }
     // --- UI Element References ---
     // Assign these in the Unity Inspector
@@ -23,6 +35,11 @@ public class UIManager : MonoBehaviour
         {
             StartCoroutine(ShowTutorial());
         }
+    }
+    public void MultiplyCoins()
+    {
+        CoinManager.Instance.AddCoins(CoinManager.Instance.Coins + 50);
+        UpdateCoinsText(CoinManager.Instance.Coins);
     }
     IEnumerator ShowTutorial()
     {
@@ -71,36 +88,19 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0.00001f;
     }
 
-    /// <summary>
-    /// Updates the score display on the screen.
-    /// </summary>
-    /// <param name="score">The new score to display.</param>
-    public void UpdateScoreText(int score)
-    {
-        if (uiItems.inGame.ScoreText != null)
-        {
-            uiItems.inGame.ScoreText.text = score.ToString();
-        }
-    }
-
-    /// <summary>
     /// Updates the coins display on the screen.
-    /// </summary>
-    /// <param name="coins">The new coin count to display.</param>
+
     public void UpdateCoinsText(int coins)
     {
         if (uiItems.inGame.CoinsText != null)
         {
-            uiItems.inGame.CoinsText.text = coins.ToString();
-            uiItems.pauseScreen.CoinsText.text = coins.ToString();
-            uiItems.gameOverScreen.CoinsText.text = coins.ToString();
+            uiItems.inGame.CoinsText.text = CoinManager.Instance.Coins.ToString();
+            uiItems.pauseScreen.CoinsText.text = CoinManager.Instance.Coins.ToString();
+            uiItems.gameOverScreen.CoinsText.text = CoinManager.Instance.Coins.ToString();
         }
     }
 
-    /// <summary>
     /// Updates the timer display on the screen.
-    /// </summary>
-    /// <param name="time">The time remaining.</param>
     public void UpdateTimerText(float time)
     {
         if (uiItems.inGame.TimerText != null)
@@ -148,8 +148,7 @@ public class UIManager : MonoBehaviour
         FadeCanvasGroup(uiItems.inGame.Screen_, false);
         FadeCanvasGroup(uiItems.pauseScreen.Screen_, false);
         FadeCanvasGroup(uiItems.gameOverScreen.Screen_, true);
-        date_time.Instance.AddCoins(int.Parse(uiItems.inGame.CoinsText.text));
-        
+
     }
     public void RestartGame()
     {
@@ -187,7 +186,7 @@ public class UIManager : MonoBehaviour
         FadeCanvasGroup(uiItems.inGame.Screen_, false);
         SceneManager.LoadScene(0);
     }
-     public void setting(bool isActive)
+    public void setting(bool isActive)
     {
         FadeCanvasGroup(uiItems.singleSettings.Screen_, isActive);
     }
@@ -195,6 +194,18 @@ public class UIManager : MonoBehaviour
     public void clearbags()
     {
         SpawnManager.Instance.ClearSandbags();
+    }
+    public void powerup1()
+    {
+        GameManager.Instance.powerup1();
+    }
+    public void powerup2()
+    {
+        GameManager.Instance.powerup2();
+    }
+    public void powerup3()
+    {
+        GameManager.Instance.powerup3();
     }
 }
 

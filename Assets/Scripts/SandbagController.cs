@@ -33,6 +33,12 @@ public class SandbagController : MonoBehaviour
     [SerializeField] private float stabilityThreshold = 0.001f;
     [SerializeField] private float stableDuration = 0.5f;
 
+    //wind effect
+    private Vector3 windDirection = Vector3.zero; // No wind by default
+    private bool windEnabled; // takes value from GameManager
+    private bool windDirectionRightToLeft; // takes value from GameManager
+    private Vector3 windRightToLeft;
+    private Vector3 windLeftToRight;
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -44,6 +50,10 @@ public class SandbagController : MonoBehaviour
         _resetPosition = transform.position;
         _resetRotation = transform.rotation;
         ResetSandbag();
+        windEnabled = GameManager.Instance.windEnabled;
+        windDirectionRightToLeft = GameManager.Instance.windDirectionRightToLeft;
+        windLeftToRight = new Vector3(GameManager.Instance.xWindVal, 0f, 0f);
+        windRightToLeft = new Vector3(-GameManager.Instance.xWindVal, 0f, 0f);
     }
 
     void Update()
@@ -71,7 +81,11 @@ public class SandbagController : MonoBehaviour
             PickupBall(Input.mousePosition);
             endPos = Input.mousePosition;
             endTime = Time.time;
-            PredictTrajectory();
+                
+            if (GameManager.Instance.powerupActive1)
+            {
+                PredictTrajectory();
+            }
         }
 
         if (Input.GetMouseButtonUp(0) && _isHolding)
@@ -94,9 +108,14 @@ public class SandbagController : MonoBehaviour
                     _isHolding = true;
                     break;
                 case TouchPhase.Moved:
-                    endPos = touch.position;
-                    endTime = Time.time;
-                    PredictTrajectory();
+                    
+                        PickupBall(Input.mousePosition);
+                        endPos = Input.mousePosition;
+                        endTime = Time.time;
+                       if (GameManager.Instance.powerupActive1)
+                    {
+                        PredictTrajectory();
+                    }
                     break;
                 case TouchPhase.Ended:
                 case TouchPhase.Canceled:
@@ -166,7 +185,11 @@ public class SandbagController : MonoBehaviour
         Vector3 forward = Camera.main.transform.forward;
         forward.y = 0;
 
-        Vector3 dir = yaw * forward.normalized;
+        if (windEnabled)
+        {
+            windDirection = windDirectionRightToLeft ? windRightToLeft : windLeftToRight;
+        }
+        Vector3 dir = yaw * forward.normalized + windDirection;
 
         float upAngle = Mathf.Clamp(swipe.y * verticalSensitivity, 10f, 32f);
         return Quaternion.AngleAxis(-upAngle, Camera.main.transform.right) * dir;
@@ -196,13 +219,16 @@ public class SandbagController : MonoBehaviour
 
         if (HasScoredInHole)
         {
-            GameManager.Instance.AddScore(3);
-            GameManager.Instance.AddCoins(30);
-            GameManager.Instance.AddTime(10f);
+            CoinManager.Instance.AddCoins(2);
+            GameManager.Instance.AddTime(2f);
         }
         else if (HasLandedOnBoard && !HasHitGround)
         {
-            GameManager.Instance.AddScore(1);
+            GameManager.Instance.AddTime(0);
+        }
+        else if (HasHitGround)
+        {
+            GameManager.Instance.AddTime(-1f);
         }
 
         GameManager.Instance.RequestNewSandbag();

@@ -292,3 +292,7 @@ public class About
         public TextMeshProUGUI day_text;
         public TextMeshProUGUI coins_text;
     }
+
+
+    // 
+        
