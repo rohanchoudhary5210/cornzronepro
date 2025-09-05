@@ -109,7 +109,7 @@ public class SandbagController : MonoBehaviour
                     break;
                 case TouchPhase.Moved:
                     
-                        PickupBall(Input.mousePosition);
+                        // PickupBall(Input.mousePosition);
                         endPos = Input.mousePosition;
                         endTime = Time.time;
                        if (GameManager.Instance.powerupActive1)
@@ -221,6 +221,7 @@ public class SandbagController : MonoBehaviour
         {
             CoinManager.Instance.AddCoins(2);
             GameManager.Instance.AddTime(2f);
+            GameManager.Instance.currentgamecoins+=2;
         }
         else if (HasLandedOnBoard && !HasHitGround)
         {

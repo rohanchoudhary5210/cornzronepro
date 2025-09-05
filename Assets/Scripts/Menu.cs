@@ -3,24 +3,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
- 
- 
+
+
 public class Menu : MonoBehaviour
 {
- 
+
     public Sprite[] sprites;
     private Coroutine aboutAnimationCoroutine;
     public Image musicButtonImage;
     public Image soundButtonImage;
     public static Menu Instance { get; private set; }
     public int index = 1;
- 
+
     void Awake()
     {
         Instance = this;
         GameOn();
     }
- 
+
     public void MusicOn()
     {
         musicButtonImage.sprite = sprites[0];
@@ -39,7 +39,7 @@ public class Menu : MonoBehaviour
     }
     public UIObjects uiObjects;
     public float fadeDuration = 0.5f;
- 
+
     public void FadeCanvasGroup(CanvasGroup canvasGroup, bool fadeIn)
     {
         // StopAllCoroutines();
@@ -47,23 +47,23 @@ public class Menu : MonoBehaviour
     }
     private IEnumerator FadeRoutine(CanvasGroup canvasGroup, bool fadeIn)
     {
- 
+
         float startAlpha = canvasGroup.alpha;
         float endAlpha = fadeIn ? 1f : 0f;
         float time = 0f;
- 
+
         while (time < fadeDuration)
         {
             canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, time / fadeDuration);
             time += Time.deltaTime;
             yield return null;
         }
- 
+
         canvasGroup.alpha = endAlpha;
         canvasGroup.interactable = fadeIn;
         canvasGroup.blocksRaycasts = fadeIn;
     }
- 
+
     public void HoldFor(float seconds)
     {
         StartCoroutine(Holdseconds(seconds));
@@ -73,7 +73,12 @@ public class Menu : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         Time.timeScale = 0.00001f;
     }
- 
+
+    public void OpenWebsite()
+    {
+        Application.OpenURL("https://www.capsitech.com/about/");
+    }
+
     public void GameOn()
     {
         FadeCanvasGroup(uiObjects.HomeScreen.Screen_, true);
@@ -111,7 +116,7 @@ public class Menu : MonoBehaviour
     {
         FadeCanvasGroup(uiObjects.settings.Screen_, isActive);
     }
- 
+
     public void aboutUs()
     {
         FadeCanvasGroup(uiObjects.settings.Screen_, false);
@@ -199,100 +204,100 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(8);
     }
 }
- 
-    [System.Serializable]
-    public class UIObjects
-    {
-        public HomeScreen HomeScreen;
-        public PlayPart playPart;
-        public TimerSubmenu timerSubmenu;
-        public PassPlaySubmenu passPlaySubmenu;
-        public Settings settings;
-        public About about;
-        public DailyRewards dailyRewards;
-        public DailyRewardsMenu dailyRewardsMenu;
- 
-    }
- 
- 
- 
- 
-    //Menu
-    [System.Serializable]
-    public class HomeScreen
-    {
-        public CanvasGroup Screen_;
-    }
- 
- 
- 
+
+[System.Serializable]
+public class UIObjects
+{
+    public HomeScreen HomeScreen;
+    public PlayPart playPart;
+    public TimerSubmenu timerSubmenu;
+    public PassPlaySubmenu passPlaySubmenu;
+    public Settings settings;
+    public About about;
+    public DailyRewards dailyRewards;
+    public DailyRewardsMenu dailyRewardsMenu;
+
+}
+
+
+
+
+//Menu
+[System.Serializable]
+public class HomeScreen
+{
+    public CanvasGroup Screen_;
+}
+
+
+
 //Play-Sub
 [System.Serializable]
 public class PlayPart
 {
     public CanvasGroup Screen_;
     public TextMeshProUGUI coins_text;
- 
-    }
- 
- 
- 
+
+}
+
+
+
 //Maps- Timer
 [System.Serializable]
 public class TimerSubmenu
 {
     public CanvasGroup Screen_;
     public TextMeshProUGUI coins_text;
-    }
- 
- 
- 
+}
+
+
+
 //Maps - PassPlay
 [System.Serializable]
 public class PassPlaySubmenu
 {
     public CanvasGroup Screen_;
     public TextMeshProUGUI coins_text;
-    }
- 
- 
+}
+
+
 //Settings
 [System.Serializable]
 public class Settings
 {
     public CanvasGroup Screen_;
     public GameObject Sound, Music;
-     public TextMeshProUGUI coins_text;
- 
-    }
- 
- 
+    public TextMeshProUGUI coins_text;
+
+}
+
+
 //Info
 [System.Serializable]
 public class About
 {
     public CanvasGroup Screen_;
-        public TextMeshProUGUI coins_text;
-    }
- 
- 
-    //DailyRewards
-    [System.Serializable]
-    public class DailyRewards
-    {
-        public CanvasGroup Screen_;
-    }
- 
- 
-    //DailyRewardsMenu
-    [System.Serializable]
-    public class DailyRewardsMenu
-    {
-        public CanvasGroup Screen_;
-        public TextMeshProUGUI day_text;
-        public TextMeshProUGUI coins_text;
-    }
+    public TextMeshProUGUI coins_text;
+}
 
 
-    // 
-        
+//DailyRewards
+[System.Serializable]
+public class DailyRewards
+{
+    public CanvasGroup Screen_;
+    public TextMeshProUGUI coins_text;
+}
+
+
+//DailyRewardsMenu
+[System.Serializable]
+public class DailyRewardsMenu
+{
+    public CanvasGroup Screen_;
+    public TextMeshProUGUI day_text;
+    public TextMeshProUGUI coins_text;
+}
+
+
+// 

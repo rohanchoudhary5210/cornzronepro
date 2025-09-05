@@ -1,10 +1,15 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System;
+using Sych.ShareAssets.Runtime;
+// using NativeShareNamespace; // Replace with actual namespace used by the plugin
+
 
 
 using UnityEngine.SceneManagement;
-
 
 /// <summary>
 /// Handles all UI updates. It gets data from other scripts but doesn't manage game state itself.
@@ -38,9 +43,31 @@ public class UIManager : MonoBehaviour
     }
     public void MultiplyCoins()
     {
-        CoinManager.Instance.AddCoins(CoinManager.Instance.Coins + 50);
+        CoinManager.Instance.AddCoins(GameManager.Instance.currentgamecoins);
         UpdateCoinsText(CoinManager.Instance.Coins);
     }
+    public void ShareTextOnly()
+{
+    string message = "Hello from Unity! This is a simple text-only share.";
+
+    List<string> itemsToShare = new List<string>
+    {
+        message
+    };
+
+    Share.Items(itemsToShare, (bool success) =>
+    {
+        if (success)
+        {
+            Debug.Log("Share window opened successfully and returned.");
+        }
+        else
+        {
+            Debug.LogWarning("Failed to open share window.");
+        }
+    });
+}
+
     IEnumerator ShowTutorial()
     {
         uiItems.tutor.Screen_.blocksRaycasts = false;
@@ -95,8 +122,8 @@ public class UIManager : MonoBehaviour
         if (uiItems.inGame.CoinsText != null)
         {
             uiItems.inGame.CoinsText.text = CoinManager.Instance.Coins.ToString();
-            uiItems.pauseScreen.CoinsText.text = CoinManager.Instance.Coins.ToString();
-            uiItems.gameOverScreen.CoinsText.text = CoinManager.Instance.Coins.ToString();
+            uiItems.pauseScreen.CoinsText.text = GameManager.Instance.currentgamecoins.ToString();
+            uiItems.gameOverScreen.CoinsText.text = GameManager.Instance.currentgamecoins.ToString();
         }
     }
 

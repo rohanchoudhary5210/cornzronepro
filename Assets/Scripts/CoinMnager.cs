@@ -72,6 +72,7 @@ public class CoinManager : MonoBehaviour
         Menu.Instance.uiObjects.passPlaySubmenu.coins_text.text = _playerCoins.ToString();
         Menu.Instance.uiObjects.settings.coins_text.text = _playerCoins.ToString();
         Menu.Instance.uiObjects.about.coins_text.text = _playerCoins.ToString();
+        Menu.Instance.uiObjects.dailyRewards.coins_text.text = _playerCoins.ToString();
     }
     void Update()
     {

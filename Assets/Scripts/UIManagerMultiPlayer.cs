@@ -98,8 +98,13 @@ public class UIManagerMultiPlayer : MonoBehaviour
         uiObject.gameOver.player2ScoreText.text = p2Score.ToString();
         uiObject.inGame.player1PointsText.text = p1points;
         uiObject.inGame.player2PointsText.text = p2points;
+        uiObject.pausePanel.player1PointsText.text = p1points;
+        uiObject.pausePanel.player2PointsText.text = p2points;
     }
-
+    public void share()
+    {
+        UIManager.Instance.ShareTextOnly();
+    }
     public void SetTurnText(string text)
     {
         uiObject.turnPanel.turnText.text = text;
@@ -208,6 +213,8 @@ public class InGame
 public class PausePanel
 {
     public CanvasGroup Screen_;
+    public TextMeshProUGUI player1PointsText;
+    public TextMeshProUGUI player2PointsText;
 }
 [System.Serializable]
 public class GameOver

@@ -1,0 +1,12 @@
+# ninja log v5
+93	394	7787773977904681	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	81af67d71496c5ab
+396	749	7787773981075485	D:/CornHole/test/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/331q4a3k/obj/arm64-v8a/libswappywrapper.so	4b7f40c9de2fc72d
+14	1855	7787773992514197	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	601144536fb53926
+22	1875	7787773992640968	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	efc0fe1de074bd6a
+60	1900	7787773993077290	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	9fc64c4754a425d9
+7	1908	7787773993173078	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	d7f8fe0181f0f8ec
+81	1938	7787773993539325	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	9905148f235bdae8
+69	1975	7787773993901011	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	dcef624298c9009e
+30	2056	7787773994718309	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	9be96cde2e4a0fb0
+0	2129	7787773995405539	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	c28800d467dcdfe0
+2130	2215	7787773996379270	D:/CornHole/test/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/331q4a3k/obj/arm64-v8a/libgame.so	67b96dcd7e155cfa

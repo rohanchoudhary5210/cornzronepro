@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public Image timerBar;
     public Sprite[] timerImage;
     public Slider timerSlider;
+    public int currentgamecoins;
 
     [Header("Power-up Settings")]
     public bool powerupActive1 = false;
@@ -45,10 +46,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         else
         {
             Instance = this;
         }
+        currentgamecoins=0;
     }
 
     void Start()
@@ -123,6 +126,7 @@ public class GameManager : MonoBehaviour
             CoinManager.Instance.UseCoins(5);
             uiManager.UpdateCoinsText(CoinManager.Instance.Coins);
             objectToShake.GetComponent<SmoothShake>().StartShake();
+            Handheld.Vibrate();
         }
         else
         {
